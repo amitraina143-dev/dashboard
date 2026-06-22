@@ -1,1 +1,479 @@
-<iframe width="402" height="346" frameborder="0" scrolling="no" src="https://holostiktest-my.sharepoint.com/personal/amit_raina_holostik_com/_layouts/15/Doc.aspx?sourcedoc={2cdcade5-0d42-4933-84ce-28d6d7346cbe}&action=embedview&wdAllowInteractivity=False&wdHideGridlines=True&wdHideHeaders=True&wdDownloadButton=True&wdInConfigurator=True&wdInConfigurator=True&edaebf=rslc0"></iframe>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Holostik India Ltd — Order Tracking Dashboard</title>
+<style>
+  /* ── Reset & Base ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; font-family: Arial, sans-serif; background: #EEF2F7; color: #2C2C2A; }
+
+  /* ── TOP NAV BAR ── */
+  .navbar {
+    background: #1F4E79;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+  }
+  .navbar-left  { display: flex; align-items: center; gap: 14px; }
+  .navbar-logo  {
+    width: 36px; height: 36px; border-radius: 8px;
+    background: linear-gradient(135deg, #F4B942, #E08A00);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; font-weight: 900; color: #fff; letter-spacing: -1px;
+  }
+  .navbar-title { color: #fff; font-size: 16px; font-weight: 700; letter-spacing: .2px; }
+  .navbar-sub   { color: rgba(255,255,255,0.6); font-size: 11px; margin-top: 1px; }
+  .navbar-right { display: flex; align-items: center; gap: 10px; }
+  .nav-time     { color: rgba(255,255,255,0.65); font-size: 11px; }
+  .nav-badge    {
+    background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2);
+    color: #fff; font-size: 11px; font-weight: 600;
+    padding: 4px 10px; border-radius: 20px;
+  }
+  .nav-badge.green { background: rgba(30,113,69,0.8); border-color: rgba(30,113,69,0.4); }
+
+  /* ── KPI STRIP ── */
+  .kpi-strip {
+    background: #1A3F60;
+    display: flex;
+    padding: 0 24px;
+    gap: 0;
+    overflow-x: auto;
+    border-bottom: 1px solid #152E47;
+  }
+  .kpi-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 24px 10px 0;
+    border-right: 1px solid rgba(255,255,255,0.1);
+    margin-right: 24px;
+    white-space: nowrap;
+  }
+  .kpi-item:last-child { border-right: none; }
+  .kpi-icon { font-size: 18px; }
+  .kpi-label { color: rgba(255,255,255,0.55); font-size: 10px; text-transform: uppercase; letter-spacing: .6px; }
+  .kpi-val   { color: #fff; font-size: 16px; font-weight: 700; margin-top: 1px; }
+
+  /* ── TABS ── */
+  .tab-bar {
+    display: flex;
+    gap: 4px;
+    padding: 12px 24px 0;
+    background: #EEF2F7;
+  }
+  .tab {
+    padding: 8px 16px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 8px 8px 0 0;
+    color: #737370;
+    background: transparent;
+    border: 1px solid transparent;
+    border-bottom: none;
+    transition: all .15s;
+    user-select: none;
+  }
+  .tab.active {
+    background: #fff;
+    border-color: #D9D9D9;
+    color: #1F4E79;
+  }
+  .tab:hover:not(.active) { color: #1F4E79; background: rgba(255,255,255,0.5); }
+
+  /* ── MAIN CARD ── */
+  .card {
+    background: #fff;
+    margin: 0 24px 20px;
+    border-radius: 0 10px 10px 10px;
+    border: 1px solid #D9D9D9;
+    box-shadow: 0 1px 6px rgba(0,0,0,.07);
+    overflow: hidden;
+  }
+  .card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 18px;
+    border-bottom: 1px solid #F0F0F0;
+    background: #FAFBFD;
+  }
+  .card-title { font-size: 12px; font-weight: 700; color: #595959; text-transform: uppercase; letter-spacing: .5px; }
+  .card-actions { display: flex; gap: 8px; align-items: center; }
+  .btn-sm {
+    padding: 5px 12px; font-size: 11px; font-weight: 600; border-radius: 6px;
+    cursor: pointer; border: 1px solid #D9D9D9; background: #fff; color: #595959;
+    display: flex; align-items: center; gap: 5px; transition: all .15s;
+  }
+  .btn-sm:hover { background: #F0F7FF; border-color: #2E75B6; color: #1F4E79; }
+  .btn-sm.primary { background: #1F4E79; color: #fff; border-color: #1F4E79; }
+  .btn-sm.primary:hover { background: #163B5C; }
+
+  /* ── EXCEL EMBED ── */
+  .embed-wrap {
+    width: 100%;
+    position: relative;
+    background: #F7F9FC;
+  }
+  .embed-wrap iframe {
+    width: 100%;
+    height: 900px;
+    border: none;
+    display: block;
+  }
+  .embed-loading {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #F7F9FC;
+    gap: 14px;
+    pointer-events: none;
+    transition: opacity .4s;
+  }
+  .embed-loading.hidden { opacity: 0; }
+  .spinner {
+    width: 36px; height: 36px;
+    border: 3px solid #D9D9D9;
+    border-top-color: #1F4E79;
+    border-radius: 50%;
+    animation: spin .8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .loading-text { font-size: 13px; color: #737370; }
+
+  /* ── NOTICE BANNER ── */
+  .notice {
+    margin: 0 24px 12px;
+    padding: 10px 16px;
+    background: #FFF8E7;
+    border: 1px solid #F4B942;
+    border-radius: 8px;
+    font-size: 12px;
+    color: #7A5000;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    line-height: 1.5;
+  }
+  .notice span { font-size: 16px; }
+
+  /* ── STATUS LEGEND ── */
+  .legend {
+    display: flex;
+    gap: 20px;
+    padding: 10px 18px;
+    border-top: 1px solid #F0F0F0;
+    background: #FAFBFD;
+    flex-wrap: wrap;
+  }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: #595959; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── FOOTER ── */
+  .footer {
+    text-align: center;
+    padding: 14px 24px;
+    font-size: 11px;
+    color: #A0A09D;
+    border-top: 1px solid #E0E0E0;
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .footer a { color: #2E75B6; text-decoration: none; }
+  .footer a:hover { text-decoration: underline; }
+
+  /* ── INSTRUCTION CARD ── */
+  .setup-card {
+    margin: 0 24px 20px;
+    background: #fff;
+    border: 1px solid #D9D9D9;
+    border-radius: 10px;
+    overflow: hidden;
+    display: none;
+  }
+  .setup-card.visible { display: block; }
+  .setup-hdr {
+    background: #1F4E79;
+    color: #fff;
+    padding: 12px 18px;
+    font-size: 13px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .setup-body { padding: 16px 18px; }
+  .setup-step { display: flex; gap: 12px; margin-bottom: 12px; align-items: flex-start; }
+  .setup-num {
+    min-width: 24px; height: 24px; border-radius: 50%;
+    background: #1F4E79; color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; flex-shrink: 0;
+  }
+  .setup-text { font-size: 12px; line-height: 1.6; color: #2C2C2A; }
+  .setup-text code {
+    background: #F0F0F0; padding: 1px 5px; border-radius: 4px;
+    font-family: monospace; font-size: 11px;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    .navbar { padding: 0 14px; }
+    .card, .notice, .setup-card, .tab-bar { margin-left: 14px; margin-right: 14px; }
+    .kpi-strip { padding: 0 14px; }
+    .embed-wrap iframe { height: 480px; }
+    .navbar-sub, .kpi-strip { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── NAV BAR ── -->
+<nav class="navbar">
+  <div class="navbar-left">
+    <div class="navbar-logo">H</div>
+    <div>
+      <div class="navbar-title">Holostik India Ltd</div>
+      <div class="navbar-sub">Order Tracking Dashboard</div>
+    </div>
+  </div>
+  <div class="navbar-right">
+    <span class="nav-time" id="clock"></span>
+    <span class="nav-badge green" id="live-status">● Live</span>
+    <button class="btn-sm" onclick="toggleSetup()" style="border-color:rgba(255,255,255,0.3);color:#fff;background:rgba(255,255,255,0.1)">
+      ⚙ Setup
+    </button>
+  </div>
+</nav>
+
+<!-- ── KPI STRIP ── -->
+<div class="kpi-strip">
+  <div class="kpi-item">
+    <span class="kpi-icon">📋</span>
+    <div>
+      <div class="kpi-label">SO Released</div>
+      <div class="kpi-val" id="kpi1">—</div>
+    </div>
+  </div>
+  <div class="kpi-item">
+    <span class="kpi-icon">📅</span>
+    <div>
+      <div class="kpi-label">TDD Lines</div>
+      <div class="kpi-val" id="kpi2">—</div>
+    </div>
+  </div>
+  <div class="kpi-item">
+    <span class="kpi-icon">📦</span>
+    <div>
+      <div class="kpi-label">Dispatched</div>
+      <div class="kpi-val" id="kpi3">—</div>
+    </div>
+  </div>
+  <div class="kpi-item">
+    <span class="kpi-icon">🕐</span>
+    <div>
+      <div class="kpi-label">Last Email</div>
+      <div class="kpi-val" id="kpi4" style="font-size:13px">—</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── SETUP CARD (hidden until Setup clicked) ── -->
+<div class="setup-card" id="setup-card" style="margin-top:14px">
+  <div class="setup-hdr">
+    <span>⚙ How to connect your Excel file</span>
+    <button onclick="toggleSetup()" style="background:transparent;border:none;color:#fff;cursor:pointer;font-size:18px">✕</button>
+  </div>
+  <div class="setup-body">
+    <div class="setup-step">
+      <div class="setup-num">1</div>
+      <div class="setup-text">Open your <strong>Holostik_Dashboard_v2.xlsx</strong> in <strong>Excel Online</strong> (browser only — not desktop app)</div>
+    </div>
+    <div class="setup-step">
+      <div class="setup-num">2</div>
+      <div class="setup-text">Click <strong>File → Share → Embed</strong> → choose the <strong>Dashboard</strong> sheet → click <strong>Generate</strong></div>
+    </div>
+    <div class="setup-step">
+      <div class="setup-num">3</div>
+      <div class="setup-text">Copy the entire <code>&lt;iframe ...&gt;&lt;/iframe&gt;</code> code that appears</div>
+    </div>
+    <div class="setup-step">
+      <div class="setup-num">4</div>
+      <div class="setup-text">Open this <strong>index.html</strong> file on GitHub → click ✏ Edit → find the line that says <code>https://holostiktest-my.sharepoint.com/personal/amit_raina_holostik_com/_layouts/15/Doc.aspx?sourcedoc={2cdcade5-0d42-4933-84ce-28d6d7346cbe}&action=embedview&wdAllowInteractivity=False&Item=DASHBOARD&wdHideGridlines=True&wdDownloadButton=True&wdInConfigurator=True&wdInConfigurator=True&edaebf=rslc0</code> and replace it with the full URL from inside the iframe's <code>src="..."</code></div>
+    </div>
+    <div class="setup-step">
+      <div class="setup-num">5</div>
+      <div class="setup-text">Save / commit the file on GitHub — your dashboard will show the live Excel data immediately</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── NOTICE ── -->
+<div class="notice" id="notice-bar" style="display:none">
+  <span>💡</span>
+  <div>
+    <strong>One-time setup needed:</strong> Replace the placeholder below with your Excel Online embed URL.
+    Click <strong>⚙ Setup</strong> above for step-by-step instructions.
+    Once connected, this page shows live data from your Excel file — updated automatically by Power Automate.
+  </div>
+  <button onclick="document.getElementById('notice-bar').style.display='none'"
+          style="background:transparent;border:none;cursor:pointer;font-size:16px;color:#7A5000;flex-shrink:0">✕</button>
+</div>
+
+<!-- ── TABS ── -->
+<div class="tab-bar">
+  <div class="tab active" onclick="switchTab(this,'dashboard')">🏠 Dashboard</div>
+  <div class="tab" onclick="switchTab(this,'so')">📋 SO Log</div>
+  <div class="tab" onclick="switchTab(this,'tdd')">📅 TDD Log</div>
+  <div class="tab" onclick="switchTab(this,'dispatch')">📦 Dispatch</div>
+</div>
+
+<!-- ── MAIN CARD ── -->
+<div class="card">
+  <div class="card-header">
+    <span class="card-title" id="card-title">Dashboard — Live View</span>
+    <div class="card-actions">
+      <button class="btn-sm" onclick="refreshEmbed()">↻ Refresh</button>
+      <button class="btn-sm primary" onclick="openInExcel()">Open in Excel ↗</button>
+    </div>
+  </div>
+
+  <div class="embed-wrap">
+    <!-- Loading overlay -->
+    <div class="embed-loading" id="loading-overlay">
+      <div class="spinner"></div>
+      <div class="loading-text">Loading live Excel data…</div>
+    </div>
+
+    <!-- EXCEL EMBED IFRAME -->
+    <!-- Replace https://holostiktest-my.sharepoint.com/personal/amit_raina_holostik_com/_layouts/15/Doc.aspx?sourcedoc={2cdcade5-0d42-4933-84ce-28d6d7346cbe}&action=embedview&wdAllowInteractivity=False&Item=DASHBOARD&wdHideGridlines=True&wdDownloadButton=True&wdInConfigurator=True&wdInConfigurator=True&edaebf=rslc0 with the src URL from your Excel Online embed code -->
+    <iframe
+      id="excel-frame"
+      src="https://holostiktest-my.sharepoint.com/personal/amit_raina_holostik_com/_layouts/15/Doc.aspx?sourcedoc={2cdcade5-0d42-4933-84ce-28d6d7346cbe}&action=embedview&wdAllowInteractivity=False&Item=DASHBOARD&wdHideGridlines=True&wdDownloadButton=True&wdInConfigurator=True&wdInConfigurator=True&edaebf=rslc0"
+      onload="iframeLoaded()"
+      allowfullscreen>
+    </iframe>
+  </div>
+
+  <!-- STATUS LEGEND -->
+  <div class="legend">
+    <div class="legend-item"><div class="dot" style="background:#1E7145"></div> ✔ Done / Found</div>
+    <div class="legend-item"><div class="dot" style="background:#C00000"></div> ✘ Pending / Not Found</div>
+    <div class="legend-item"><div class="dot" style="background:#1F4E79"></div> 📋 SO Released</div>
+    <div class="legend-item"><div class="dot" style="background:#008080"></div> 📅 TDD Set</div>
+    <div class="legend-item"><div class="dot" style="background:#C07000"></div> 📦 Dispatched</div>
+    <span style="font-size:11px;color:#A0A09D;margin-left:auto">Data auto-updates via Power Automate</span>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<div class="footer">
+  <div>© 2026 Holostik India Ltd &nbsp;·&nbsp; Order Tracking Dashboard</div>
+  <div>
+    Built with Power Automate + Excel Online &nbsp;·&nbsp;
+    <a href="https://amitraina143-dev.github.io/holostik-dashboard" target="_blank">Open Dashboard ↗</a>
+  </div>
+</div>
+
+<script>
+// ── Tab config ─────────────────────────────────────────────────────
+// Replace each URL with the embed URL for that specific sheet
+// Get embed URL: Excel Online → File → Share → Embed → select sheet → Generate → copy src="..." value
+const SHEET_URLS = {
+  dashboard: 'https://holostiktest-my.sharepoint.com/personal/amit_raina_holostik_com/_layouts/15/Doc.aspx?sourcedoc={2cdcade5-0d42-4933-84ce-28d6d7346cbe}&action=embedview&wdAllowInteractivity=False&Item=DASHBOARD&wdHideGridlines=True&wdDownloadButton=True&wdInConfigurator=True&wdInConfigurator=True&edaebf=rslc0',
+  so:        'https://holostiktest-my.sharepoint.com/personal/amit_raina_holostik_com/_layouts/15/Doc.aspx?sourcedoc={2cdcade5-0d42-4933-84ce-28d6d7346cbe}&action=embedview&wdAllowInteractivity=False&Item=SO%20Log&wdHideGridlines=True&wdDownloadButton=True&wdInConfigurator=True&wdInConfigurator=True&edaebf=rslc0',
+  tdd:       'https://holostiktest-my.sharepoint.com/personal/amit_raina_holostik_com/_layouts/15/Doc.aspx?sourcedoc={2cdcade5-0d42-4933-84ce-28d6d7346cbe}&action=embedview&wdAllowInteractivity=False&Item=TDD%20Log&wdHideGridlines=True&wdDownloadButton=True&wdInConfigurator=True&wdInConfigurator=True&edaebf=rslc0',
+  dispatch:  'https://holostiktest-my.sharepoint.com/personal/amit_raina_holostik_com/_layouts/15/Doc.aspx?sourcedoc={2cdcade5-0d42-4933-84ce-28d6d7346cbe}&action=embedview&wdAllowInteractivity=False&Item=Dispatch%20Log&wdHideGridlines=True&wdDownloadButton=True&wdInConfigurator=True&wdInConfigurator=True&edaebf=rslc0',
+};
+
+const SHEET_TITLES = {
+  dashboard: 'Dashboard — Live View',
+  so:        'SO Log — Sales Orders Released',
+  tdd:       'TDD Log — Tentative Dispatch Dates',
+  dispatch:  'Dispatch Log — Shipped Orders',
+};
+
+// ── Excel file direct URL (for "Open in Excel" button) ─────────────
+// Replace with the sharing link from OneDrive (File → Share → Copy Link)
+const EXCEL_DIRECT_URL = 'PASTE_YOUR_ONEDRIVE_SHARE_LINK_HERE';
+
+let currentTab = 'dashboard';
+
+function switchTab(el, tab) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  currentTab = tab;
+  document.getElementById('card-title').textContent = SHEET_TITLES[tab];
+  loadEmbed(SHEET_URLS[tab]);
+}
+
+function loadEmbed(url) {
+  const frame = document.getElementById('excel-frame');
+  document.getElementById('loading-overlay').classList.remove('hidden');
+  frame.src = url;
+}
+
+function iframeLoaded() {
+  setTimeout(() => {
+    document.getElementById('loading-overlay').classList.add('hidden');
+    document.getElementById('live-status').textContent = '● Live';
+    document.getElementById('live-status').className = 'nav-badge green';
+  }, 800);
+}
+
+function refreshEmbed() {
+  loadEmbed(SHEET_URLS[currentTab]);
+}
+
+function openInExcel() {
+  if (EXCEL_DIRECT_URL === 'PASTE_YOUR_ONEDRIVE_SHARE_LINK_HERE') {
+    alert('Please set the EXCEL_DIRECT_URL in the script section of index.html');
+    return;
+  }
+  window.open(EXCEL_DIRECT_URL, '_blank');
+}
+
+function toggleSetup() {
+  const card = document.getElementById('setup-card');
+  card.classList.toggle('visible');
+}
+
+// ── Clock ──────────────────────────────────────────────────────────
+function updateClock() {
+  const now = new Date();
+  document.getElementById('clock').textContent =
+    now.toLocaleDateString('en-IN', {day:'2-digit',month:'short',year:'numeric'}) + '  ' +
+    now.toLocaleTimeString('en-IN', {hour:'2-digit',minute:'2-digit'});
+}
+updateClock();
+setInterval(updateClock, 60000);
+
+// ── Simulated KPIs (replace with real values or remove) ────────────
+// These update to show placeholder — once connected to real Excel
+// the embed itself shows live numbers inside the sheet
+setTimeout(() => {
+  document.getElementById('kpi1').textContent = '—';
+  document.getElementById('kpi2').textContent = '—';
+  document.getElementById('kpi3').textContent = '—';
+  document.getElementById('kpi4').textContent = 'Auto';
+}, 1000);
+</script>
+
+</body>
+</html>
