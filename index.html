@@ -240,6 +240,170 @@
     .embed-wrap iframe { height: 480px; }
     .navbar-sub, .kpi-strip { display: none; }
   }
+
+  /* ── SEARCH TAB ── */
+  .search-section { padding: 16px 24px; display: none; }
+  .search-section.active { display: block; }
+  .search-top {
+    background: #fff;
+    border: 1px solid #D9D9D9;
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-bottom: 16px;
+    box-shadow: 0 1px 6px rgba(0,0,0,.06);
+  }
+  .search-top-title {
+    font-size: 13px; font-weight: 700; color: #1F4E79;
+    margin-bottom: 12px; display: flex; align-items: center; gap: 8px;
+  }
+  .search-inputs { display: flex; gap: 10px; flex-wrap: wrap; align-items: flex-end; }
+  .search-group { display: flex; flex-direction: column; gap: 4px; }
+  .search-group label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: #737370; }
+  .search-inp {
+    height: 38px; border: 1.5px solid #D9D9D9; border-radius: 7px;
+    padding: 0 14px; font-size: 13px; width: 260px; outline: none;
+    transition: border .15s; color: #2C2C2A;
+  }
+  .search-inp:focus { border-color: #1F4E79; box-shadow: 0 0 0 3px rgba(31,78,121,.12); }
+  .search-filters { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+  .filter-chip {
+    padding: 5px 12px; font-size: 11px; font-weight: 600; border-radius: 20px;
+    border: 1.5px solid #D9D9D9; background: #fff; color: #595959;
+    cursor: pointer; transition: all .15s;
+  }
+  .filter-chip:hover { border-color: #1F4E79; color: #1F4E79; }
+  .filter-chip.active { background: #1F4E79; color: #fff; border-color: #1F4E79; }
+  .filter-chip.teal.active   { background: #008080; border-color: #008080; }
+  .filter-chip.amber.active  { background: #C07000; border-color: #C07000; }
+  .search-stats {
+    display: flex; gap: 16px; margin-top: 12px;
+    padding-top: 12px; border-top: 1px solid #F0F0F0;
+    flex-wrap: wrap;
+  }
+  .stat-item { font-size: 12px; color: #595959; }
+  .stat-item strong { color: #1F4E79; }
+
+  /* ── REPORT TABLE ── */
+  .report-card {
+    background: #fff; border: 1px solid #D9D9D9;
+    border-radius: 10px; overflow: hidden;
+    box-shadow: 0 1px 6px rgba(0,0,0,.06);
+  }
+  .report-hdr {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 11px 18px; border-bottom: 1px solid #F0F0F0; background: #FAFBFD;
+    flex-wrap: wrap; gap: 8px;
+  }
+  .report-hdr-left { font-size: 12px; font-weight: 700; color: #595959; text-transform: uppercase; letter-spacing: .5px; }
+  .report-hdr-right { display: flex; gap: 8px; align-items: center; }
+  .result-count { font-size: 12px; color: #737370; background: #F0F0F0; padding: 3px 10px; border-radius: 20px; }
+
+  .report-table-wrap { overflow-x: auto; max-height: 600px; overflow-y: auto; }
+  .report-table { width: 100%; border-collapse: collapse; font-size: 12px; min-width: 1200px; }
+  .report-table thead th {
+    position: sticky; top: 0; z-index: 10;
+    padding: 9px 12px; text-align: left;
+    font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px;
+    white-space: nowrap; cursor: pointer; user-select: none;
+    border-bottom: 2px solid #D9D9D9;
+  }
+  .report-table thead th:hover { opacity: .85; }
+  .report-table thead th.so-col   { background: #1F4E79; color: #fff; }
+  .report-table thead th.tdd-col  { background: #008080; color: #fff; }
+  .report-table thead th.disp-col { background: #C07000; color: #fff; }
+  .report-table thead th.stat-col { background: #1E7145; color: #fff; }
+  .report-table tbody tr { border-bottom: 1px solid #F0F0F0; transition: background .1s; }
+  .report-table tbody tr:hover { background: #F0F7FF; cursor: pointer; }
+  .report-table tbody td { padding: 8px 12px; vertical-align: middle; }
+  .report-table tbody td.wrap { white-space: normal; word-break: break-word; max-width: 200px; }
+  .report-table tbody td.nowrap { white-space: nowrap; }
+  .report-table tbody tr.highlight-row { background: #FFFDE7; }
+
+  .badge-done { display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:700;background:#E2EFDA;color:#1E7145; }
+  .badge-pend { display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:700;background:#FCE4D6;color:#C00000; }
+  .badge-na   { display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:700;background:#F0F0F0;color:#737370; }
+
+  .no-results { text-align: center; padding: 48px 20px; color: #737370; }
+  .no-results .no-icon { font-size: 40px; margin-bottom: 10px; }
+
+  .grp-header { font-size: 10px; font-weight: 700; letter-spacing: .5px; padding: 3px 0 0 18px; }
+
+  /* highlight matching text */
+  mark { background: #FFF176; color: #2C2C2A; border-radius: 2px; padding: 0 1px; }
+
+
+  /* ══ SEARCH & REPORT TAB ══ */
+  #tab-search { display:none; padding:16px 24px 24px; }
+  .srch-card  { background:#fff; border:1px solid #D9D9D9; border-radius:10px;
+                box-shadow:0 1px 6px rgba(0,0,0,.06); overflow:hidden; margin-bottom:16px; }
+  .srch-card-hdr { background:#1F4E79; color:#fff; padding:12px 18px;
+                   font-size:13px; font-weight:700; display:flex;
+                   align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; }
+  .srch-inputs { display:flex; gap:10px; flex-wrap:wrap; align-items:flex-end; padding:14px 18px 10px; }
+  .srch-grp    { display:flex; flex-direction:column; gap:4px; }
+  .srch-grp label { font-size:10px; font-weight:700; text-transform:uppercase;
+                    letter-spacing:.5px; color:#737370; }
+  .srch-inp    { height:38px; border:1.5px solid #D9D9D9; border-radius:7px;
+                 padding:0 14px; font-size:13px; width:250px; outline:none;
+                 transition:border .15s; }
+  .srch-inp:focus { border-color:#1F4E79; box-shadow:0 0 0 3px rgba(31,78,121,.12); }
+  .chips-row   { display:flex; gap:6px; flex-wrap:wrap; padding:0 18px 12px; }
+  .chip        { padding:4px 12px; font-size:11px; font-weight:600; border-radius:20px;
+                 border:1.5px solid #D9D9D9; background:#fff; color:#595959;
+                 cursor:pointer; transition:all .15s; user-select:none; }
+  .chip:hover  { border-color:#1F4E79; color:#1F4E79; }
+  .chip.on     { background:#1F4E79; color:#fff; border-color:#1F4E79; }
+  .chip.on.tl  { background:#008080; border-color:#008080; }
+  .chip.on.am  { background:#C07000; border-color:#C07000; }
+  .chip.on.gn  { background:#1E7145; border-color:#1E7145; }
+  .stats-row   { display:flex; gap:16px; flex-wrap:wrap; padding:0 18px 14px;
+                 border-top:1px solid #F0F0F0; margin-top:4px; padding-top:10px; }
+  .stat        { font-size:12px; color:#595959; }
+  .stat strong { color:#1F4E79; font-size:14px; }
+  /* table */
+  .tbl-card    { background:#fff; border:1px solid #D9D9D9; border-radius:10px;
+                 box-shadow:0 1px 6px rgba(0,0,0,.06); overflow:hidden; }
+  .tbl-hdr     { display:flex; align-items:center; justify-content:space-between;
+                 padding:10px 18px; border-bottom:1px solid #F0F0F0;
+                 background:#FAFBFD; flex-wrap:wrap; gap:8px; }
+  .tbl-title   { font-size:12px; font-weight:700; color:#595959;
+                 text-transform:uppercase; letter-spacing:.5px; }
+  .tbl-wrap    { overflow-x:auto; max-height:580px; overflow-y:auto; }
+  .rtbl        { width:100%; border-collapse:collapse; font-size:12px; min-width:900px; }
+  .rtbl thead th { position:sticky; top:0; z-index:10; padding:8px 10px;
+                   text-align:left; font-size:10px; font-weight:700;
+                   text-transform:uppercase; letter-spacing:.4px; white-space:nowrap;
+                   cursor:pointer; user-select:none; border-bottom:2px solid rgba(255,255,255,.3); }
+  .rtbl thead th:hover { opacity:.85; }
+  .th-so   { background:#1F4E79; color:#fff; }
+  .th-tdd  { background:#008080; color:#fff; }
+  .th-disp { background:#C07000; color:#fff; }
+  .th-stat { background:#1E7145; color:#fff; cursor:default !important; }
+  .rtbl tbody tr { border-bottom:1px solid #F0F0F0; transition:background .1s; }
+  .rtbl tbody tr:nth-child(even) { background:#F7F9FC; }
+  .rtbl tbody tr:hover { background:#E8F4FF !important; cursor:default; }
+  .rtbl td  { padding:7px 10px; vertical-align:middle; }
+  .td-w     { white-space:normal; word-break:break-word; max-width:180px; }
+  .td-n     { white-space:nowrap; }
+  .bdn  { display:inline-flex;align-items:center;gap:3px;padding:2px 7px;
+          border-radius:20px;font-size:11px;font-weight:700;
+          background:#E2EFDA;color:#1E7145; }
+  .bdp  { display:inline-flex;align-items:center;gap:3px;padding:2px 7px;
+          border-radius:20px;font-size:11px;font-weight:700;
+          background:#FCE4D6;color:#C00000; }
+  mark  { background:#FFF176; border-radius:2px; padding:0 1px; }
+  .empty-msg { text-align:center; padding:40px; color:#737370; font-size:13px; }
+  .paste-zone { border:2px dashed #D9D9D9; border-radius:8px; padding:20px;
+                margin:14px 18px; background:#FAFAFA; }
+  .paste-zone textarea { width:100%; height:100px; border:1px solid #D9D9D9;
+                         border-radius:6px; padding:8px; font-size:11px;
+                         font-family:monospace; resize:vertical; outline:none; }
+  .paste-zone textarea:focus { border-color:#1F4E79; }
+  .paste-lbl { font-size:12px; font-weight:700; color:#595959; margin-bottom:6px; display:block; }
+  .paste-btns { display:flex; gap:8px; margin-top:8px; flex-wrap:wrap; }
+  .howto { background:#EBF3FB; border-radius:8px; padding:12px 16px;
+           margin:0 18px 14px; font-size:12px; color:#1F4E79; line-height:1.7; }
+  .howto strong { display:block; margin-bottom:4px; font-size:13px; }
 </style>
 </head>
 <body>
@@ -342,6 +506,7 @@
   <div class="tab" onclick="switchTab(this,'so')">📋 SO Log</div>
   <div class="tab" onclick="switchTab(this,'tdd')">📅 TDD Log</div>
   <div class="tab" onclick="switchTab(this,'dispatch')">📦 Dispatch</div>
+  <div class="tab" onclick="switchTab(this,'search')" id="tab-btn-search">🔍 Search & Report</div>
 </div>
 
 <!-- ── MAIN CARD ── -->
@@ -397,9 +562,9 @@
 // Get embed URL: Excel Online → File → Share → Embed → select sheet → Generate → copy src="..." value
 const SHEET_URLS = {
   dashboard: 'https://holostiktest-my.sharepoint.com/personal/amit_raina_holostik_com/_layouts/15/Doc.aspx?sourcedoc={2cdcade5-0d42-4933-84ce-28d6d7346cbe}&action=embedview&wdAllowInteractivity=False&Item=DASHBOARD&wdHideGridlines=True&wdDownloadButton=True&wdInConfigurator=True&wdInConfigurator=True&edaebf=rslc0',
-  so:        'https://holostiktest-my.sharepoint.com/personal/amit_raina_holostik_com/_layouts/15/Doc.aspx?sourcedoc={2cdcade5-0d42-4933-84ce-28d6d7346cbe}&action=embedview&wdAllowInteractivity=False&Item=SO%20Log&wdHideGridlines=True&wdDownloadButton=True&wdInConfigurator=True&wdInConfigurator=True&edaebf=rslc0',
-  tdd:       'https://holostiktest-my.sharepoint.com/personal/amit_raina_holostik_com/_layouts/15/Doc.aspx?sourcedoc={2cdcade5-0d42-4933-84ce-28d6d7346cbe}&action=embedview&wdAllowInteractivity=False&Item=TDD%20Log&wdHideGridlines=True&wdDownloadButton=True&wdInConfigurator=True&wdInConfigurator=True&edaebf=rslc0',
-  dispatch:  'https://holostiktest-my.sharepoint.com/personal/amit_raina_holostik_com/_layouts/15/Doc.aspx?sourcedoc={2cdcade5-0d42-4933-84ce-28d6d7346cbe}&action=embedview&wdAllowInteractivity=False&Item=Dispatch%20Log&wdHideGridlines=True&wdDownloadButton=True&wdInConfigurator=True&wdInConfigurator=True&edaebf=rslc0',
+  so:        'https://holostiktest-my.sharepoint.com/personal/amit_raina_holostik_com/_layouts/15/Doc.aspx?sourcedoc={2cdcade5-0d42-4933-84ce-28d6d7346cbe}&action=embedview&wdAllowInteractivity=False&Item=SOLog&wdHideGridlines=True&wdDownloadButton=True&wdInConfigurator=True&wdInConfigurator=True&edaebf=rslc0',
+  tdd:       'https://holostiktest-my.sharepoint.com/personal/amit_raina_holostik_com/_layouts/15/Doc.aspx?sourcedoc={2cdcade5-0d42-4933-84ce-28d6d7346cbe}&action=embedview&wdAllowInteractivity=False&Item=TDDLog&wdHideGridlines=True&wdDownloadButton=True&wdInConfigurator=True&wdInConfigurator=True&edaebf=rslc0',
+  dispatch:  'https://holostiktest-my.sharepoint.com/personal/amit_raina_holostik_com/_layouts/15/Doc.aspx?sourcedoc={2cdcade5-0d42-4933-84ce-28d6d7346cbe}&action=embedview&wdAllowInteractivity=False&Item=DispatchLog&wdHideGridlines=True&wdDownloadButton=True&wdInConfigurator=True&wdInConfigurator=True&edaebf=rslc0',
 };
 
 const SHEET_TITLES = {
@@ -473,6 +638,373 @@ setTimeout(() => {
   document.getElementById('kpi3').textContent = '—';
   document.getElementById('kpi4').textContent = 'Auto';
 }, 1000);
+</script>
+
+
+
+
+<!-- ══ SEARCH & REPORT TAB ══ -->
+<div id="tab-search">
+
+  <!-- Search controls -->
+  <div class="srch-card">
+    <div class="srch-card-hdr">
+      <span>🔍 Search & Report — All SO, TDD & Dispatch fields</span>
+      <span id="srch-status" style="font-size:11px;font-weight:400;opacity:.8">Paste your data below to enable search</span>
+    </div>
+
+    <!-- How to get data -->
+    <div class="howto" id="howto-box">
+      <strong>📋 How to load your data into this search tab:</strong>
+      1. Open your Excel file in SharePoint &nbsp;→&nbsp;
+      2. Go to <b>SO Log</b> sheet &nbsp;→&nbsp;
+      3. Select all data (Ctrl+A) &nbsp;→&nbsp;
+      4. Copy (Ctrl+C) &nbsp;→&nbsp;
+      5. Paste into the "SO Log Data" box below &nbsp;→&nbsp;
+      6. Repeat for TDD Log and Dispatch Log &nbsp;→&nbsp;
+      7. Click <b>Load Data</b>
+    </div>
+
+    <!-- Paste zones -->
+    <div class="paste-zone">
+      <span class="paste-lbl">📋 SO Log Data — paste here (include header row)</span>
+      <textarea id="paste-so" placeholder="Paste SO Log sheet data here (Ctrl+A, Ctrl+C from Excel, then Ctrl+V here)..."></textarea>
+      <span class="paste-lbl" style="margin-top:10px">📅 TDD Log Data — paste here (include header row)</span>
+      <textarea id="paste-tdd" placeholder="Paste TDD Log sheet data here..."></textarea>
+      <span class="paste-lbl" style="margin-top:10px">📦 Dispatch Log Data — paste here (include header row)</span>
+      <textarea id="paste-disp" placeholder="Paste Dispatch Log sheet data here..."></textarea>
+      <div class="paste-btns">
+        <button class="btn-sm primary" onclick="loadPastedData()">▶ Load Data</button>
+        <button class="btn-sm" onclick="clearAllData()">✕ Clear All</button>
+        <span id="load-msg" style="font-size:12px;color:#1E7145;align-self:center"></span>
+      </div>
+    </div>
+
+    <!-- Search inputs -->
+    <div class="srch-inputs">
+      <div class="srch-grp">
+        <label>🔢 SO Number / Invoice / POD No.</label>
+        <input class="srch-inp" id="s-num" type="text" placeholder="e.g. 27300101616" oninput="doSearch()">
+      </div>
+      <div class="srch-grp">
+        <label>🔤 Customer / Item / Courier / Any text</label>
+        <input class="srch-inp" id="s-txt" type="text" placeholder="e.g. TASMAC or Blue Dart" oninput="doSearch()">
+      </div>
+      <button class="btn-sm" onclick="clearSearch()" style="height:38px">✕ Clear</button>
+      <button class="btn-sm primary" onclick="doExport()" style="height:38px">⬇ Export CSV</button>
+    </div>
+
+    <!-- Column filter chips -->
+    <div class="chips-row">
+      <span style="font-size:11px;color:#737370;align-self:center">Show columns:</span>
+      <span class="chip on"    onclick="setFilter(this,'all')">All</span>
+      <span class="chip"       onclick="setFilter(this,'so')">📋 SO Log</span>
+      <span class="chip tl"    onclick="setFilter(this,'tdd')">📅 TDD Log</span>
+      <span class="chip am"    onclick="setFilter(this,'disp')">📦 Dispatch</span>
+      <span class="chip gn"    onclick="setFilter(this,'stat')">✅ Status Only</span>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-row">
+      <div class="stat">SO Log: <strong id="c-so">0</strong> rows</div>
+      <div class="stat">TDD Log: <strong id="c-tdd">0</strong> rows</div>
+      <div class="stat">Dispatch: <strong id="c-disp">0</strong> rows</div>
+      <div class="stat">Results: <strong id="c-res">0</strong></div>
+    </div>
+  </div>
+
+  <!-- Report table -->
+  <div class="tbl-card">
+    <div class="tbl-hdr">
+      <span class="tbl-title" id="tbl-title">Report — All Headers</span>
+      <div style="display:flex;gap:8px;align-items:center">
+        <span class="result-count" id="tbl-count">0 rows</span>
+      </div>
+    </div>
+    <div class="tbl-wrap">
+      <table class="rtbl" id="rtbl">
+        <thead id="rtbl-head"></thead>
+        <tbody id="rtbl-body">
+          <tr><td colspan="10" class="empty-msg">
+            Paste your Excel data above and click "Load Data" to enable search
+          </td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<script>
+/* ══ SEARCH TAB LOGIC ══ */
+
+// Data store
+var D = { so:[], tdd:[], disp:[], soH:[], tddH:[], dispH:[] };
+var results = [];
+var filterMode = 'all';
+var sortC = -1, sortDir = 1;
+
+// ── switchTab override ────────────────────────
+var _st = window.switchTab;
+window.switchTab = function(el, tab) {
+  var ts = document.getElementById('tab-search');
+  if (tab === 'search') {
+    document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');});
+    el.classList.add('active');
+    document.querySelector('.card').style.display = 'none';
+    ts.style.display = 'block';
+  } else {
+    ts.style.display = 'none';
+    document.querySelector('.card').style.display = 'block';
+    _st(el, tab);
+  }
+};
+
+// ── Parse tab/comma-separated text ───────────
+function parsePaste(text) {
+  if (!text || !text.trim()) return { headers:[], rows:[] };
+  var lines = text.trim().split(/\r?\n/);
+  if (lines.length < 2) return { headers:[], rows:[] };
+  // Detect delimiter: tab or comma
+  var delim = lines[0].indexOf('\t') > -1 ? '\t' : ',';
+  var headers = lines[0].split(delim).map(function(h){ return h.replace(/^"|"$/g,'').trim(); });
+  var rows = [];
+  for (var i = 1; i < lines.length; i++) {
+    var vals = lines[i].split(delim);
+    if (vals.every(function(v){ return !v.trim(); })) continue;
+    var row = {};
+    headers.forEach(function(h, idx){
+      row[h] = (vals[idx]||'').replace(/^"|"$/g,'').trim();
+    });
+    rows.push(row);
+  }
+  return { headers: headers, rows: rows };
+}
+
+// ── Load pasted data ──────────────────────────
+function loadPastedData() {
+  var so   = parsePaste(document.getElementById('paste-so').value);
+  var tdd  = parsePaste(document.getElementById('paste-tdd').value);
+  var disp = parsePaste(document.getElementById('paste-disp').value);
+  D.so    = so.rows;   D.soH   = so.headers;
+  D.tdd   = tdd.rows;  D.tddH  = tdd.headers;
+  D.disp  = disp.rows; D.dispH = disp.headers;
+  document.getElementById('c-so').textContent   = D.so.length;
+  document.getElementById('c-tdd').textContent  = D.tdd.length;
+  document.getElementById('c-disp').textContent = D.disp.length;
+  document.getElementById('load-msg').textContent =
+    '✔ Loaded: ' + D.so.length + ' SO + ' + D.tdd.length + ' TDD + ' + D.disp.length + ' Dispatch rows';
+  document.getElementById('srch-status').textContent =
+    'Data loaded — ' + (D.so.length + D.tdd.length + D.disp.length) + ' total rows';
+  document.getElementById('howto-box').style.display = 'none';
+  buildHeaders();
+  doSearch();
+}
+
+function clearAllData() {
+  D = { so:[], tdd:[], disp:[], soH:[], tddH:[], dispH:[] };
+  document.getElementById('paste-so').value   = '';
+  document.getElementById('paste-tdd').value  = '';
+  document.getElementById('paste-disp').value = '';
+  document.getElementById('load-msg').textContent = '';
+  document.getElementById('c-so').textContent  = '0';
+  document.getElementById('c-tdd').textContent = '0';
+  document.getElementById('c-disp').textContent= '0';
+  document.getElementById('c-res').textContent = '0';
+  document.getElementById('tbl-count').textContent = '0 rows';
+  document.getElementById('rtbl-body').innerHTML =
+    '<tr><td colspan="10" class="empty-msg">Data cleared — paste new data above</td></tr>';
+}
+
+// ── Get value helper ──────────────────────────
+function gv(row) {
+  if (!row) return '';
+  return Object.values(row).join(' ');
+}
+
+function soKey(row) {
+  return (row['SO Number']||row['SO No.']||row['Sales Order No.']||'').trim();
+}
+
+// ── Build report headers ──────────────────────
+function buildHeaders() {
+  var head = document.getElementById('rtbl-head');
+  var soH   = D.soH.length   ? D.soH   : ['SO Number','Bill-To Customer','Item Description','Quantity','Amount','Sales Person'];
+  var tddH  = D.tddH.length  ? D.tddH  : ['SO No.','TDD 1','TDD 1 Remarks','Remaining Qty'];
+  var dispH = D.dispH.length ? D.dispH : ['Sales Order No.','Invoice No.','Dispatch Date','POD / LR No.','Courier / Transporter'];
+  var html = '<tr>';
+  soH.forEach(function(h,i){   html += '<th class="th-so"   onclick="sortBy('+i+',\'so\')">' + h + ' ⇅</th>'; });
+  tddH.forEach(function(h,i){  html += '<th class="th-tdd"  onclick="sortBy('+i+',\'tdd\')">' + h + ' ⇅</th>'; });
+  dispH.forEach(function(h,i){ html += '<th class="th-disp" onclick="sortBy('+i+',\'disp\')">' + h + ' ⇅</th>'; });
+  html += '<th class="th-stat">SO</th><th class="th-stat">TDD</th><th class="th-stat">Dispatch</th>';
+  html += '</tr>';
+  head.innerHTML = html;
+}
+
+// ── Main search ───────────────────────────────
+function doSearch() {
+  var numQ = (document.getElementById('s-num').value||'').trim().toLowerCase();
+  var txtQ = (document.getElementById('s-txt').value||'').trim().toLowerCase();
+
+  if (!D.so.length && !D.tdd.length && !D.disp.length) {
+    document.getElementById('rtbl-body').innerHTML =
+      '<tr><td colspan="10" class="empty-msg">Paste your Excel data above and click Load Data first</td></tr>';
+    document.getElementById('c-res').textContent = '0';
+    document.getElementById('tbl-count').textContent = '0 rows';
+    return;
+  }
+
+  // Build SO number universe
+  var soNums = [];
+  var seen = {};
+  D.so.forEach(function(r){ var n=soKey(r); if(n&&!seen[n]){seen[n]=1;soNums.push(n);} });
+  D.tdd.forEach(function(r){ var n=soKey(r); if(n&&!seen[n]){seen[n]=1;soNums.push(n);} });
+  D.disp.forEach(function(r){ var n=soKey(r); if(n&&!seen[n]){seen[n]=1;soNums.push(n);} });
+
+  results = [];
+  soNums.forEach(function(sn) {
+    var soR   = D.so.find(function(r){   return soKey(r)===sn; }) || {};
+    var tddR  = D.tdd.find(function(r){  return soKey(r)===sn; }) || {};
+    var dispR = D.disp.find(function(r){ return soKey(r)===sn; }) || {};
+    var haystack = (gv(soR)+' '+gv(tddR)+' '+gv(dispR)).toLowerCase();
+    if (numQ && haystack.indexOf(numQ) === -1) return;
+    if (txtQ && haystack.indexOf(txtQ) === -1) return;
+    results.push({ soR:soR, tddR:tddR, dispR:dispR, sn:sn,
+      soFound:  Object.keys(soR).length  > 0,
+      tddFound: Object.keys(tddR).length > 0,
+      dispFound:Object.keys(dispR).length> 0
+    });
+  });
+
+  // Sort
+  if (sortC >= 0) {
+    results.sort(function(a,b){
+      var av = '', bv = '';
+      var grp = sortDir > 0 ? a : b;
+      // sortC and source tracked via sortSrc
+      if (window.sortSrc==='so')   { av=(a.soR[D.soH[sortC]]||'');   bv=(b.soR[D.soH[sortC]]||'');   }
+      if (window.sortSrc==='tdd')  { av=(a.tddR[D.tddH[sortC]]||''); bv=(b.tddR[D.tddH[sortC]]||''); }
+      if (window.sortSrc==='disp') { av=(a.dispR[D.dispH[sortC]]||'');bv=(b.dispR[D.dispH[sortC]]||'');}
+      return av.localeCompare(bv,undefined,{numeric:true}) * (sortDir);
+    });
+  }
+
+  document.getElementById('c-res').textContent = results.length;
+  document.getElementById('tbl-count').textContent = results.length + ' rows';
+  renderTable(numQ || txtQ);
+}
+
+// ── Render ────────────────────────────────────
+function renderTable(q) {
+  var tbody = document.getElementById('rtbl-body');
+  if (!results.length) {
+    tbody.innerHTML = '<tr><td colspan="10" class="empty-msg">No matching records found</td></tr>';
+    return;
+  }
+  var showSO   = filterMode==='all'||filterMode==='so';
+  var showTDD  = filterMode==='all'||filterMode==='tdd';
+  var showDisp = filterMode==='all'||filterMode==='disp';
+  var showStat = filterMode==='all'||filterMode==='stat';
+  var soH   = D.soH;
+  var tddH  = D.tddH;
+  var dispH = D.dispH;
+
+  // Apply header visibility
+  var ths = document.querySelectorAll('#rtbl thead th');
+  var soLen   = soH.length;
+  var tddLen  = tddH.length;
+  var dispLen = dispH.length;
+  ths.forEach(function(th, i){
+    var inSO   = i < soLen;
+    var inTDD  = i >= soLen && i < soLen+tddLen;
+    var inDisp = i >= soLen+tddLen && i < soLen+tddLen+dispLen;
+    var inStat = i >= soLen+tddLen+dispLen;
+    th.style.display = (
+      (inSO   && (showSO||filterMode==='stat'))   ||
+      (inTDD  && (showTDD||filterMode==='stat'))  ||
+      (inDisp && (showDisp||filterMode==='stat')) ||
+      inStat
+    ) ? '' : 'none';
+    if (filterMode==='stat') {
+      th.style.display = inStat ? '' : 'none';
+    }
+  });
+
+  tbody.innerHTML = results.map(function(row, idx){
+    var cells = '';
+    if (filterMode !== 'stat') {
+      if (showSO)   soH.forEach(function(h){
+        var v = row.soR[h]||'—';
+        cells += '<td class="td-n">'+(q?hl(v,q):v)+'</td>';
+      });
+      if (showTDD)  tddH.forEach(function(h){
+        var v = row.tddR[h]||'—';
+        cells += '<td class="td-n">'+(q?hl(v,q):v)+'</td>';
+      });
+      if (showDisp) dispH.forEach(function(h){
+        var v = row.dispR[h]||'—';
+        cells += '<td class="td-n">'+(q?hl(v,q):v)+'</td>';
+      });
+    } else {
+      cells = '<td class="td-n" style="font-weight:700;color:#1F4E79">'+row.sn+'</td>';
+    }
+    cells += '<td style="text-align:center"><span class="'+(row.soFound?'bdn':'bdp')+'">'+(row.soFound?'✔':'✘')+'</span></td>';
+    cells += '<td style="text-align:center"><span class="'+(row.tddFound?'bdn':'bdp')+'">'+(row.tddFound?'✔':'✘')+'</span></td>';
+    cells += '<td style="text-align:center"><span class="'+(row.dispFound?'bdn':'bdp')+'">'+(row.dispFound?'✔':'✘')+'</span></td>';
+    return '<tr>'+cells+'</tr>';
+  }).join('');
+}
+
+// ── Highlight ─────────────────────────────────
+function hl(text, q) {
+  if (!q||!text||text==='—') return text||'—';
+  var re = new RegExp('('+q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi');
+  return text.replace(re,'<mark>$1</mark>');
+}
+
+// ── Sort ──────────────────────────────────────
+function sortBy(idx, src) {
+  window.sortSrc = src;
+  if (sortC===idx && window.lastSrc===src) sortDir*=-1;
+  else { sortC=idx; sortDir=1; }
+  window.lastSrc = src;
+  doSearch();
+}
+
+// ── Filter chips ──────────────────────────────
+function setFilter(el, mode) {
+  document.querySelectorAll('.chip').forEach(function(c){c.classList.remove('on');});
+  el.classList.add('on');
+  filterMode = mode;
+  doSearch();
+}
+
+// ── Clear ─────────────────────────────────────
+function clearSearch() {
+  document.getElementById('s-num').value = '';
+  document.getElementById('s-txt').value = '';
+  doSearch();
+}
+
+// ── Export CSV ────────────────────────────────
+function doExport() {
+  if (!results.length) { alert('No data to export'); return; }
+  var headers = D.soH.concat(D.tddH).concat(D.dispH).concat(['SO Released','TDD Set','Dispatched']);
+  var rows = results.map(function(r){
+    var vals = [];
+    D.soH.forEach(function(h){   vals.push('"'+(r.soR[h]||'').replace(/"/g,'""')+'"'); });
+    D.tddH.forEach(function(h){  vals.push('"'+(r.tddR[h]||'').replace(/"/g,'""')+'"'); });
+    D.dispH.forEach(function(h){ vals.push('"'+(r.dispR[h]||'').replace(/"/g,'""')+'"'); });
+    vals.push(r.soFound?'YES':'NO', r.tddFound?'YES':'NO', r.dispFound?'YES':'NO');
+    return vals.join(',');
+  });
+  var csv = [headers.map(function(h){return '"'+h+'"';}).join(',')].concat(rows).join('\n');
+  var blob = new Blob([csv],{type:'text/csv'});
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'Holostik_Report_'+new Date().toISOString().slice(0,10)+'.csv';
+  a.click();
+}
 </script>
 
 </body>
